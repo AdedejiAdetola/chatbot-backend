@@ -15,16 +15,24 @@ const io = new Server(server, {
         methods: ['GET', 'POST'],
     }
 })
+const welcomeMessage = {
+    message: 'welcome',
+    time: String(new Date(Date.now()).getHours()).padStart(2,0) + ":" + String(new Date(Date.now()).getMinutes()).padStart(2,0)
+}
 
 io.on('connection', (socket) => {
-    console.log(socket.id)
-    socket.emit('receive_message', 'welcome')
+    //console.log(socket.id)
+    socket.emit('receive_message', welcomeMessage)
 
     // if socket.id, then let on>emit work
     socket.on('send_message', (data) => {
-        console.log(data)
+        //console.log('message',data)
         //if data.messge = this, emit that
-        socket.emit('receive_message', 'boys')
+        const messageResponse = {
+            message: 'wagwan my gee',
+            time: String(new Date(Date.now()).getHours()).padStart(2,0) + ":" + String(new Date(Date.now()).getMinutes()).padStart(2,0)
+        }
+        socket.emit('receive_message', messageResponse)
     })
 
     
