@@ -15,13 +15,14 @@ const io = new Server(server, {
         methods: ['GET', 'POST'],
     }
 })
-const welcomeMessage = {
-    message: 'welcome',
-    time: String(new Date(Date.now()).getHours()).padStart(2,0) + ":" + String(new Date(Date.now()).getMinutes()).padStart(2,0)
-}
+
 
 io.on('connection', (socket) => {
     //console.log(socket.id)
+    const welcomeMessage = {
+        message: 'welcome',
+        time: String(new Date(Date.now()).getHours()).padStart(2,0) + ":" + String(new Date(Date.now()).getMinutes()).padStart(2,0)
+    }
     socket.emit('receive_message', welcomeMessage)
 
     // if socket.id, then let on>emit work
